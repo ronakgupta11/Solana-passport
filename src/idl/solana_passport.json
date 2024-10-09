@@ -1,0 +1,166 @@
+{
+    "version": "0.1.0",
+    "name": "solana_passport",
+    "instructions": [
+        {
+            "name": "createStamp",
+            "accounts": [
+                {
+                    "name": "userStamp",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "proofRegistry",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "user",
+                    "isMut": true,
+                    "isSigner": true
+                },
+                {
+                    "name": "systemProgram",
+                    "isMut": false,
+                    "isSigner": false
+                }
+            ],
+            "args": [
+                {
+                    "name": "proofName",
+                    "type": "string"
+                },
+                {
+                    "name": "userUniqueId",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "addProof",
+            "accounts": [
+                {
+                    "name": "userStamp",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "proofRegistry",
+                    "isMut": true,
+                    "isSigner": false
+                }
+            ],
+            "args": [
+                {
+                    "name": "proofName",
+                    "type": "string"
+                },
+                {
+                    "name": "newProofId",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "initializeRegistry",
+            "accounts": [
+                {
+                    "name": "proofRegistry",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "user",
+                    "isMut": true,
+                    "isSigner": true
+                },
+                {
+                    "name": "systemProgram",
+                    "isMut": false,
+                    "isSigner": false
+                }
+            ],
+            "args": []
+        }
+    ],
+    "accounts": [
+        {
+            "name": "UserStamp",
+            "type": {
+                "kind": "struct",
+                "fields": [
+                    {
+                        "name": "wallet",
+                        "type": "publicKey"
+                    },
+                    {
+                        "name": "stampCount",
+                        "type": "u64"
+                    },
+                    {
+                        "name": "score",
+                        "type": "u64"
+                    },
+                    {
+                        "name": "proofs",
+                        "type": {
+                            "vec": {
+                                "defined": "Proof"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "ProofRegistry",
+            "type": {
+                "kind": "struct",
+                "fields": [
+                    {
+                        "name": "usedProofs",
+                        "type": {
+                            "vec": {
+                                "array": [
+                                    "u8",
+                                    32
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "types": [
+        {
+            "name": "Proof",
+            "type": {
+                "kind": "struct",
+                "fields": [
+                    {
+                        "name": "name",
+                        "type": "string"
+                    },
+                    {
+                        "name": "proof",
+                        "type": {
+                            "array": [
+                                "u8",
+                                32
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "errors": [
+        {
+            "code": 6000,
+            "name": "ProofAlreadyUsed",
+            "msg": "The provided proof (identifier) has already been used."
+        }
+    ]
+}
