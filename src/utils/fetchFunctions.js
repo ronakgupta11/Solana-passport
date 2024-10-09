@@ -79,7 +79,7 @@ export const getUserStamps = async (connection,wallet,publicKey) => {
   // Fetch the user's stamp data
   const accountInfo = await program.provider.connection.getAccountInfo(userStampPDA);
   if(accountInfo == null){
-    return []
+    return {proofs:[]}
   }
   else{
     const userStamp = await program.account.userStamp.fetch(userStampPDA);
