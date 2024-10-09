@@ -117,7 +117,7 @@ function Page() {
         console.log("val",val)
         setStamps(val.proofs)
         if(val){
-            setScore(10*val.stampCount)
+            setScore(val.stampCount? 10*val.stampCount :0)
         }
     })
 
