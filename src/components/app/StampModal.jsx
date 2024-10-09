@@ -29,7 +29,7 @@ export default function StampModal({score,productId,title}) {
     const [loading,setLoading]  = useState(false)
     const [signature,setSignature] = useState("")
     const [proofs, setProofs] = useState(
-    {identifier:"uid"}
+   null
     )
 
     // Create a new stamp (initial proof) for the user
