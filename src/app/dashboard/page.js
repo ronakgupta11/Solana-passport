@@ -116,7 +116,7 @@ function Page() {
     getUserStamps(connection,wallet,publicKey).then(val=>{
         console.log("val",val)
         setStamps(val.proofs)
-        if(val.proofs.length != 0){
+        if(val){
             setScore(10*val.stampCount)
         }
     })
